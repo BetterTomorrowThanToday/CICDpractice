@@ -19,6 +19,12 @@ pipeline {
                 sh "./gradlew compileJava"
             }
         }
+        stage('Build') {
+            steps {
+                // Gradle 빌드를 실행
+                sh './gradlew build'
+            }
+        }
 
         stage("Unit Test") {
             steps {
