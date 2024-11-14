@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDENTIALS = credentials('forDockerhub') // Docker Hub 자격 증명
-        DOCKERHUB_REPO = "hikiki/cicd_practice" // Docker Hub 저장소
+        DOCKERHUB_REPO = "hikikiki/cicd_practice" // Docker Hub 저장소
         IMAGE_TAG = "latest" // Docker 이미지 태그 (예: "latest" 또는 "${env.BUILD_NUMBER}")
     }
     stages {
