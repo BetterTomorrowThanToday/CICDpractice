@@ -1,8 +1,9 @@
 FROM bellsoft/liberica-openjdk-alpine:17
 
-ARG JAR_FILE=build/libs/*.jar
+#ARG JAR_FILE=build/libs/*.jar
 
-COPY ${JAR_FILE} app.jar
+#COPY ${JAR_FILE} app.jar
+COPY bulletin-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
