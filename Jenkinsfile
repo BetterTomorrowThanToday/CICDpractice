@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_HUB_USERNAME = credentials('forDockerhub').USR
-        DOCKER_HUB_PASSWORD = credentials('forDockerhub').PSW
-    }
     stages {
         stage("Permission") {
             steps {
@@ -57,9 +53,9 @@ pipeline {
 
                 // Docker Hub login, build, push, and logout
                 sh '''
-                    docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-                    docker build -t $DOCKER_HUB_USERNAME/cicd_practice:latest .
-                    docker push $DOCKER_HUB_USERNAME/cicd_practice:latest
+                    docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+                    docker build -t $DOCKERHUB_USERNAME/cicd_practice:latest .
+                    docker push $DOCKERHUB_USERNAME/cicd_practice:latest
                     docker logout
                 '''
             }
