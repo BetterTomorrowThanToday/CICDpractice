@@ -53,7 +53,7 @@ pipeline {
                 echo "Set Variables"
 
                 script {
-                    withCredentials([usernamePassword(credentialsId: forDockerhub,
+                    withCredentials([usernamePassword(credentialsId: 'forDockerhub',
                                                                passwordVariable: 'DOCKER_HUB_PASSWORD',
                                                                usernameVariable: 'DOCKER_HUB_USERNAME')]) {
 
