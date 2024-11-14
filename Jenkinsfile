@@ -81,9 +81,9 @@ pipeline {
             steps {
                 // Docker Hub에 로그인하고 이미지 푸시
                 echo 'Pushing Docker image to Docker Hub...'
-                sh ('echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                sh '''echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin
                 docker push ${DOCKERHUB_REPO}:${IMAGE_TAG}
-                ')
+                '''
             }
         }
     }
