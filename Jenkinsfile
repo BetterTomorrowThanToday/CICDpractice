@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage("Permission") {
             steps {
@@ -16,6 +17,11 @@ pipeline {
         stage("Unit Test") {
             steps {
                 sh "./gradlew test"
+            }
+            post {
+                always {
+                    junit '**/build/test-results/test/*.xml'
+                }
             }
         }
 
@@ -44,7 +50,7 @@ pipeline {
 
         stage("Set Variables") {
             steps {
-                echo "SetVariables"
+                echo "Set Variables"
 
                 script {
                     DOCKER_HUB_URL = 'registry.hub.docker.com'
