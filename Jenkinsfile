@@ -53,9 +53,22 @@ pipeline {
                 echo "Set Variables"
 
                 script {
-                    DOCKER_HUB_URL = 'registry.hub.docker.com'
-                    DOCKER_HUB_FULL_URL = 'https://' + DOCKER_HUB_URL
-                    DOCKER_HUB_CREDENTIAL_ID = 'docker-hub'
+                    withCredentials([usernamePassword(credentialsId: forDockerhub,
+                                                               passwordVariable: 'DOCKER_HUB_PASSWORD',
+                                                               usernameVariable: 'DOCKER_HUB_USERNAME')]) {
+
+                                    // Docker Hub 로그인
+                                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+
+                                    // Docker 이미지 빌드
+                                    sh "docker build -t ${DOCKER_HUB_USERNAME}/cicd_practice:latest ."
+
+                                    // Docker Hub에 이미지 푸시
+                                    sh "docker push ${DOCKER_HUB_USERNAME}/cicd_practice:latest"
+
+                                    // Docker 로그아웃 (보안을 위해)
+                                    sh "docker logout"
+                                }
                 }
             }
         }
